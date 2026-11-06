@@ -1,0 +1,366 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "UptimeWatch",
+    "version": "0.1.0",
+    "description": "Мониторинг доступности; request examples and route contract. Exact required fields and invariants are validated by Go handlers."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8087"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/monitors": {
+      "post": {
+        "operationId": "uptimewatch_post_monitors",
+        "summary": "POST /monitors",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "interval_seconds": {
+                    "type": "integer"
+                  },
+                  "threshold": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "url": "https://example.com",
+                "interval_seconds": 60,
+                "threshold": 3
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "uptimewatch_get_monitors",
+        "summary": "GET /monitors",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/monitors/{id}": {
+      "patch": {
+        "operationId": "uptimewatch_patch_monitors_id",
+        "summary": "PATCH /monitors/{id}",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "paused": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "example": {
+                "paused": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monitors/{id}/checks": {
+      "get": {
+        "operationId": "uptimewatch_get_monitors_id_checks",
+        "summary": "GET /monitors/{id}/checks",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/incidents": {
+      "get": {
+        "operationId": "uptimewatch_get_incidents",
+        "summary": "GET /incidents",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "operationId": "uptimewatch_get_status",
+        "summary": "GET /status",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    }
+  }
+}

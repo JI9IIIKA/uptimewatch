@@ -1,0 +1,4 @@
+CREATE TABLE monitors(tenant text NOT NULL,id text NOT NULL,url text NOT NULL,interval_seconds integer NOT NULL CHECK(interval_seconds BETWEEN 10 AND 86400),threshold integer NOT NULL DEFAULT 3 CHECK(threshold BETWEEN 1 AND 20),failures integer NOT NULL DEFAULT 0,next_at timestamptz NOT NULL DEFAULT now(),paused boolean NOT NULL DEFAULT false,PRIMARY KEY(tenant,id));
+CREATE TABLE checks(id bigserial PRIMARY KEY,tenant text NOT NULL,monitor_id text NOT NULL,ok boolean NOT NULL,latency_ms bigint NOT NULL,status_code integer NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE incidents(id text PRIMARY KEY,tenant text NOT NULL,monitor_id text NOT NULL,opened_at timestamptz NOT NULL DEFAULT now(),closed_at timestamptz);
+CREATE UNIQUE INDEX one_open_incident ON incidents(tenant,monitor_id) WHERE closed_at IS NULL;

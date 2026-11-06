@@ -1,0 +1,6 @@
+Standalone module: build PASS; vet PASS; unit tests PASS.
+API/SQL on PGlite, single connection:
+=== RUN   TestUptimeWatch
+--- PASS: TestUptimeWatch (0.02s)
+PASS
+ok  	uptimewatch/tests	0.027s
